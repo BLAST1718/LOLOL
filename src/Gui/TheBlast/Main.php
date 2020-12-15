@@ -42,7 +42,7 @@ class Main extends PluginBase{
 		return true;
 	}
 
-	public function tgui(Player $player){
+	public function server(Player $player){
 		$menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
 		$menu->readOnly();
 		$menu->setListener(\Closure::fromCallable([$this, "GUIListener"]));
@@ -60,7 +60,7 @@ class Main extends PluginBase{
 		$trapdoor = Item::get(Item::WOODEN_TRAPDOOR)->setCustomName("Raft Survival");
 		$sword = Item::get(Item::DIAMOND_SWORD)->setCustomName("FFA and More");
 		$stone = Item::get(Item::STONE)->setCustomName("Skygrid");
-		$inv->setItem(27, $lobby);
+		$inv->setItem(27, $quartz);
 		$inv->setItem(11, $bow);
                 $inv->setItem(12, $bed);
 		$inv->setItem(13, $red_concrete);
