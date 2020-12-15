@@ -1,6 +1,6 @@
-name: LN GameGui
+name: GameGui
 main: Gui\TheBlast\Main
-author: [TheBlast, QMoon]
+author: [TheBlast]
 version: 3.0
 api: 3.0.0
 command:
