@@ -1,0 +1,8 @@
+name: LN GameGui
+main: Gui\TheBlast\Main
+author: [TheBlast, QMoon]
+version: 3.0
+api: 3.0.0
+command:
+ games:
+  description: opens game gui
