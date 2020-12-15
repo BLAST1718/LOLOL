@@ -20,9 +20,9 @@ class Main extends PluginBase{
 		if(!InvMenuHandler::isRegistered()){
 			InvMenuHandler::register($this);
 		}
-		$command = new PluginCommand("games", $this);
+		$command = new PluginCommand("server", $this);
 		$command->setDescription("Open games gui");
-		$this->getServer()->getCommandMap()->register("games", $command);
+		$this->getServer()->getCommandMap()->register("server", $command);
 	}
 
 	public function onDisable(){
@@ -31,12 +31,12 @@ class Main extends PluginBase{
 
 	public function onCommand(CommandSender $player, Command $cmd, string $label, array $args) : bool{
 		switch($cmd->getName()){
-			case "games":
+			case "server":
 				if(!$player instanceof Player){
-					$player->sendMessage("Select a games");
+					$player->sendMessage("Select games");
 					return true;
 				}
-				$this->tgui($player);
+				$this->server($player);
 				break;
 		}
 		return true;
@@ -49,87 +49,87 @@ class Main extends PluginBase{
 		$menu->setName("Games");
 		$menu->send($player);
 		$inv = $menu->getInventory();
-		$lobby = Item::get(Item::BOOKSHELF)->setCustomName("Main Lobby");
+		$quartz = Item::get(Item::QUARTZ_BLOCK)->setCustomName("Main Lobby");
 		$bow = Item::get(Item::BOW)->setCustomName("SkyWars");
-    $bed = Item::get(Item::BED)->setCustomName("BedWars");
-		$clay = Item::get(Item::CLAY)->setCustomName("The Bridge");
+                $bed = Item::get(Item::BED)->setCustomName("BedWars");
+		$red_concrete = Item::get(Item::CONCRETE, 14)->setCustomName("The Bridge");
 		$grass = Item::get(Item::GRASS)->setCustomName("SkyBlock");
 		$tnt = Item::get(Item::TNT)->setCustomName("TNT Run");
-		$apple = Item::get(Item::ENCHANTED_GOLDEN_APPLE)->setCustomName("PVP");
-		$anvil = Item::get(Item::ANVIL)->setCustomName("UHC");
-		$feather = Item::get(Item::FEATHER)->setCustomName("MLG Block");
-		$sword = Item::get(Item::DIAMOND_SWORD)->setCustomName("Survival Games");
-		$book = Item::get(Item::BOOK)->setCustomName("Munder Mystery");
-		$inv->setItem(4, $lobby);
-		$inv->setItem(19, $bow);
-    $inv->setItem(21, $bed);
-		$inv->setItem(23, $clay);
-		$inv->setItem(25, $grass);
-		$inv->setItem(28, $tnt);
-		$inv->setItem(30, $apple);
-		$inv->setItem(32, $anvil);
-		$inv->setItem(34, $feather);
-		$inv->setItem(37, $sword);
-		$inv->setItem(39, $book);
+		$snowball = Item::get(Item::SNOWBALL)->setCustomName("Spleef");
+		$soul = Item::get(Item::SOUL_SAND)->setCustomName("UHC");
+		$trapdoor = Item::get(Item::WOODEN_TRAPDOOR)->setCustomName("Raft Survival");
+		$sword = Item::get(Item::DIAMOND_SWORD)->setCustomName("FFA and More");
+		$stone = Item::get(Item::STONE)->setCustomName("Skygrid");
+		$inv->setItem(27, $lobby);
+		$inv->setItem(11, $bow);
+                $inv->setItem(12, $bed);
+		$inv->setItem(13, $red_concrete);
+		$inv->setItem(14, $grass);
+		$inv->setItem(15, $tnt);
+		$inv->setItem(16, $snowball);
+		$inv->setItem(20, $soul);
+		$inv->setItem(21, $trapdoor);
+		$inv->setItem(22, $sword);
+		$inv->setItem(23, $stone);
 		
 	}
 
 	public function GUIListener(InvMenuTransaction $action) : InvMenuTransactionResult{
 		$itemClicked = $action->getOut();
 		$player = $action->getPlayer();
-		if($itemClicked->getId() == 47){
+		if($itemClicked->getId() == 155){
 			$action->getAction()->getInventory()->onClose($player);
-			$this->getServer()->dispatchCommand($player, "transfer main");
+			$this->getServer()->dispatchCommand($player, "transferserver dragoncraft.soutarmc.com 4110");
 			return $action->discard();
 		}
 		if($itemClicked->getId() == 261){
 			$action->getAction()->getInventory()->onClose($player);
-			$this->getServer()->dispatchCommand($player, "transfer skywars");
+			$this->getServer()->dispatchCommand($player, "transferserver dragoncraft.soutarmc.com 4111");
 			return $action->discard();
 		}
-        if($itemClicked->getId() == 355){
+                if($itemClicked->getId() == 355){
 			$action->getAction()->getInventory()->onClose($player);
-			$this->getServer()->dispatchCommand($player, "transfer bedwars");
+			$this->getServer()->dispatchCommand($player, "transferserver dragoncraft.soutarmc.com 4113");
 			return $action->discard();
 		}
-		if($itemClicked->getCustomName() == "The Bridge"){
+		if($itemClicked->getId() == 159 && $itemClicked->getDamage() === 14){
 			$action->getAction()->getInventory()->onClose($player);
-			$this->getServer()->dispatchCommand($player, "transfer tb");
+			$this->getServer()->dispatchCommand($player, "transferserver dragoncraft.soutarmc.com 4112");
 			return $action->discard();
 		}
 		if($itemClicked->getId() == 2){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer skyblock");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
 		if($itemClicked->getId() == 46){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer tnt");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
-		if($itemClicked->getCustomName() == "PVP"){
+		if($itemClicked->getId() == "276"){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer pvp");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
-		if($itemClicked->getId() == 145){
+		if($itemClicked->getId() == 88){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer uhc");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
-		if($itemClicked->getId() == 288){
+		if($itemClicked->getId() == 332){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer mlg");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
-		if($itemClicked->getId() == 276){
+		if($itemClicked->getId() == 96){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer sg");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
-		if($itemClicked->getId() == 340){
+		if($itemClicked->getId() == 1){
 		  $action->getAction()->getInventory()->onClose($player);
-		  $this->getServer()->dispatchCommand($player, "transfer munder");
+		  $this->getServer()->dispatchCommand($player, "say this gamemode is not available yet");
 		  return $action->discard();
 		}
 		return $action->discard();
