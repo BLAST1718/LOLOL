@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/BLAST1718/LOLOL
+build-by-default: true
+branches:
+- main
+projects:
+  LOLOL:
+    path: ""
+...
